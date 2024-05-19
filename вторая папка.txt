@@ -1,0 +1,293 @@
+1. def set_title(self, title):
+    self.title = title
+
+def set_author(self, author):
+    self.author = author
+
+2. class Soda:
+    def __init__(self, addon):
+        self.addon = addon
+
+    def show_my_drink(self):
+        if self.addon:
+            print(f"Газировка и {self.addon}")
+        else:
+            print("Обычная газировка")
+
+3. class TriangleChecker:
+    def __init__(self, a, b, c):
+        if a <= 0 or b <= 0 or c <= 0:
+            self.result = "С отрицательными числами ничего не выйдет!"
+        elif not isinstance(a, (int, float)) or not isinstance(b, (int, float)) or not isinstance(c, (int, float)):
+            self.result = "Нужно вводить только числа!"
+        elif a + b > c and a + c > b and b + c > a:
+            self.result = "Ура, можно построить треугольник!"
+        else:
+            self.result = "Жаль, но из этого треугольник не сделать."
+
+    def is_triangle(self):
+        return self.result
+
+4. class Nikola:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+        if "Николай" not in self.name:
+            self.name = f"не {self.name}, а Николай"
+    
+    def get_info(self):
+        return f"Меня зовут {self.name} и мне {self.age} лет."
+
+nikolay = Nikola("Николай", 30)
+print(nikolay.get_info()) 
+
+maxim = Nikola("Максим", 25)
+print(maxim.get_info())  
+
+5. def add_book(self, book):
+    self.book_list.append(book)
+    print(f'Книга "{book}" добавлена в список книг')
+
+def remove_book(self, book):
+    if book in self.book_list:
+        self.book_list.remove(book)
+        print(f'Книга "{book}" удалена из списка книг')
+    else:
+        print(f'Книги "{book}" нет в списке книг')
+
+def find_book(self, title):
+    for book in self.book_list:
+        if title.lower() in book.lower():
+            print(f'Книга "{book}" найдена в списке книг')
+            return
+    print(f'Книги "{title}" нет в списке книг')
+
+library = Library()
+
+library.add_book("Война и мир")
+library.add_book("Преступление и наказание")
+library.add_book("Мастер и Маргарита")
+
+library.remove_book("Преступление и наказание")
+
+library.find_book("Мастер и Маргарита")
+library.find_book("Гарри Поттер")
+
+6. def init(self):
+self.planes = []
+self.routes = []
+
+def add_plane(self, plane):
+    self.planes.append(plane)
+
+def remove_plane(self, plane):
+    self.planes.remove(plane)
+
+def add_route(self, route):
+    self.routes.append(route)
+
+def remove_route(self, route):
+    self.routes.remove(route)
+
+def find_plane_by_model(self, model):
+    for plane in self.planes:
+        if plane.model == model:
+            return plane
+    return None
+
+def find_routes_for_city(self, city):
+    available_routes = []
+    for route in self.routes:
+        if city in route.cities:
+            available_routes.append(route)
+    return available_routes
+airline = Airline()
+
+plane1 = Plane("Boeing 747")
+plane2 = Plane("Airbus A380")
+
+route1 = Route(["Нью Йорк", "Лондон"])
+route2 = Route(["Париж", "Токио"])
+
+airline.add_plane(plane1)
+airline.add_plane(plane2)
+
+airline.add_route(route1)
+airline.add_route(route2)
+
+def init(self, model):
+self.model = model
+
+
+class Route:
+def init(self, cities):
+self.cities = cities
+
+print("Самолеты:")
+for plane in airline.planes:
+print(plane.model)
+
+print("\nRouts:")
+for route in airline.routes:
+print(route.cities)
+
+found_plane = airline.find_plane_by_model("Boeing 747")
+if found_plane:
+print("\nFound plane:", found_plane.model)
+else:
+print("\nPlane не найден")
+
+city = "Paris"
+available_routes = airline.find_routes_for_city(city)
+print("\nAvailable routes for", city + ":")
+for route in available_routes:
+print(route.cities)
+
+7. def init(self, account_number, owner, balance):
+self.account_number = account_number
+self.owner = owner
+self.balance = balance
+
+def deposit(self, amount):
+    self.balance += amount - amount * 0.01  # 1% commission
+    print(f"Вложено {amount} . Настоящий баланс: {self.balance} ")
+
+def withdraw(self, amount):
+    if self.balance >= amount:
+        self.balance -= amount + amount * 0.01  # 1% commission
+        print(f"Снято {amount} . Настоящий баланс: {self.balance} ")
+    else:
+        print("недостаточно средств")
+
+def check_balance(self):
+    print(f"Баланс {self.owner}: {self.balance} ")
+
+def deposit(self, amount):
+    self.balance += amount - amount * 0.01  # 1% commission
+    print(f"Положено {amount} . Настоящий баланс: {self.balance} ")
+
+def withdraw(self, amount):
+    if self.balance >= amount:
+        self.balance -= amount + amount * 0.01  # 1% commission
+        print(f"Снято {amount} . Настоящий баланс: {self.balance} ")
+    else:
+        print("Недостаточно средств")
+
+def check_balance(self):
+    print(f"Баланс {self.owner}: {self.balance} ")
+    
+account1.deposit(500)
+account2.withdraw(200)
+
+account1.check_balance()
+account2.check_balance()
+
+8. import math
+
+class Point:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def distance_to(self, other_point):
+        return math.sqrt((self.x - other_point.x)**2 + (self.y - other_point.y)**2)
+
+    def move(self, distance, direction):
+        if direction == 'up':
+            self.y += distance
+        elif direction == 'down':
+            self.y -= distance
+        elif direction == 'right':
+            self.x += distance
+        elif direction == 'left':
+            self.x -= distance
+
+    def is_on_axis(self):
+        if self.x == 0 or self.y == 0:
+            return True
+        else:
+            return False
+
+point1 = Point(3, 4)
+point2 = Point(0, 0)
+
+distance = point1.distance_to(point2)
+print(f"Расстояние между точками: {distance}")
+
+point1.move(5, 'right')
+print(f"Новые координаты точки: ({point1.x}, {point1.y})")
+
+print(f"Точка 1 лежит на оси: {point1.is_on_axis()}")
+print(f"Точка 2 лежит на оси: {point2.is_on_axis()}")
+
+9. class Product:
+
+def init(self, name, price, quantity):
+self.name = name
+self.price = price
+self.quantity = quantity
+
+def increase_quantity(self, amount):
+    self.quantity += amount
+
+def decrease_quantity(self, amount):
+    if self.quantity >= amount:
+        self.quantity -= amount
+    else:
+        print("Not enough quantity available.")
+
+def total_cost(self):
+    return self.price * self.quantity
+
+product1 = product("Молоко", 2.5, 10)
+product2 = product("Хлеб", 1.0, 5)
+
+product1.increase_quantity(5)
+product2.decrease_quantity(3)
+
+print("Общая стоимость товара 1:", product1.total_cost())
+print("Общая стоимость товара 2:", product2.total_cost())
+
+10. class Student:
+def init(self, name, age):
+self.name = name
+self.age = age
+self.subjects = []
+
+def add_subject(self, subject):
+    self.subjects.append(subject)
+
+def remove_subject(self, subject):
+    if subject in self.subjects:
+        self.subjects.remove(subject)
+    else:
+        print(f"{subject} не находится в списке предметов.")
+
+def calculate_average_grade(self):
+    total_grade = 0
+    for subject in self.subjects:
+        total_grade += subject.grade
+    return total_grade / len(self.subjects)
+
+class Subject:
+def init(self, name, grade):
+self.name = name
+self.grade = grade
+
+math = Subject("Математика", 90)
+science = Subject("Химия", 85)
+history = Subject("История", 88)
+
+student1 = Student("Алиса", 20)
+student2 = Student("Никита", 22)
+
+student1.add_subject(math)
+student1.add_subject(science)
+student2.add_subject(math)
+student2.add_subject(history)
+
+print(f"{student1.name}ина средняя оценка {student1.calculate_average_grade()}.")
+print(f"{student2.name}ина средняя оценка {student2.calculate_average_grade()}.")
+
+student1.remove_subject(science)
+print(f"{student1.name}ина средняя оценка без учета химии: {[subject.name for subject in student1.subjects]}.")

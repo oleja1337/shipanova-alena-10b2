@@ -1,0 +1,82 @@
+1. string = input("Напишите любые слова: ")
+
+words = string.split()
+unique_words = sorted(set(words))
+
+print("Ваши слова в альфавитном порядке:")
+for word in unique_words:
+    print(word)
+2. a = int(input("Введите значение a: "))
+b = int(input("Введите значение b: "))
+sum_of_primes = 0
+
+def is_prime(num):
+    if num < 2:
+        return False
+    for i in range(2, int(num**0.5)+1):
+        if num % i == 0:
+            return False
+    return True
+
+for num in range(a, b+1):
+    if is_prime(num):
+        sum_of_primes += num
+
+print(f"Сумма всех простых чисел в интервале от {a} до {b} равна {sum_of_primes}")
+3. def is_palindrome(s):
+    s = ''.join(c.lower() for c in s if c.isalnum())
+    return s == s[::-1]
+
+input_string = input("Введите строку: ")
+if is_palindrome(input_string):
+    print("Введённая строка является палиндромом.")
+else:
+    print("Введённая строка не является палиндромом.")
+4. import random
+
+def determine_winner(user_choice, computer_choice):
+    if user_choice == computer_choice:
+        return "Ничья!"
+    elif (user_choice == "камень" and computer_choice == "ножницы") or (user_choice == "ножницы" and computer_choice == "бумага") or \
+         (user_choice == "бумага" and computer_choice == "камень"):
+        return "Вы выиграли!"
+    else:
+        return "Компьютер выиграл!"
+
+choices = ["камень", "ножницы", "бумага"]
+
+user_choice = input("Сделайте ваш выбор (камень, ножницы или бумага): ")
+while user_choice not in choices:
+    print("Некорректный выбор, попробуйте снова.")
+    user_choice = input("Сделайте ваш выбор (камень, ножницы или бумага): ")
+
+computer_choice = random.choice(choices)
+
+print("Вы выбрали:", user_choice)
+print("Компьютер выбрал:", computer_choice)
+
+winner = determine_winner(user_choice, computer_choice)
+print(winner)
+5. import csv
+
+with open('data.csv', 'r') as file:
+    reader = csv.reader(file)
+    
+    data = list(reader)
+    num_columns = len(data[0])
+    sums = [0] * num_columns
+    counts = [0] * num_columns
+    
+    for row in data:
+        for i in range(num_columns):
+            try:
+                value = float(row[i])
+                sums[i] += value
+                counts[i] += 1
+            except ValueError:
+                pass
+    
+    averages = [sums[i] / counts[i] if counts[i] != 0 else 0 for i in range(num_columns)]
+    
+    for i, avg in enumerate(averages):
+        print(f'Среднее значение в колонке {i + 1}: {avg}')

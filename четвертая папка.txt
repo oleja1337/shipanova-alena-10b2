@@ -1,0 +1,173 @@
+1. from itertools import permutations
+
+def generate_combinations(word):
+    word = word.lower()
+    combinations = set()
+    
+    for i in range(1, len(word)+1):
+        perms = permutations(word, i)
+        for perm in perms:
+            combinations.add(''.join(perm))
+    
+    return combinations
+
+word = input("Введите слово: ")
+combinations = generate_combinations(word)
+
+print("Все возможные комбинации букв в слове:")
+for combination in combinations:
+    print(combination)
+
+2. from collections import Counter
+import re
+
+def analyze_text(file_name):
+    with open(file_name, 'r') as file:
+        text = file.read()
+    
+    words = re.findall(r'\w+', text.lower())
+    word_counts = Counter(words)
+    
+    most_common_words = word_counts.most_common(10)
+    
+    for word, count in most_common_words:
+        print(f'{word}: {count}')
+
+file_name = 'text.txt'
+analyze_text(file_name)
+
+3. def fast_power(base, exponent):
+    if exponent == 0:
+        return 1
+    elif exponent % 2 == 0:
+        return fast_power(base * base, exponent // 2)
+    else:
+        return base * fast_power(base, exponent - 1)
+
+base = 2
+exponent = 5
+result = fast_power(base, exponent)
+print(f"{base} в степени {exponent} равно {result}")
+
+4. def find_largest_nonincreasing_sequence(numbers):
+    result = [numbers[0]]
+
+    for i in range(1, len(numbers)):
+        if numbers[i] <= result[-1]:
+            result.append(numbers[i])
+    
+    return result
+
+numbers = [3, 5, 2, 8, 6, 4, 5, 1]
+largest_nonincreasing_sequence = find_largest_nonincreasing_sequence(numbers)
+
+print(largest_nonincreasing_sequence)
+
+5. import csv
+
+file_path = 'data.csv'
+
+column_number = 2
+
+total = 0
+
+with open(file_path, 'r') as file:
+    csv_reader = csv.reader(file)
+   
+    next(csv_reader)
+    
+    for row in csv_reader:
+        total += int(row[column_number])
+
+print(f'Сумма значений столбца {column_number}: {total}')
+
+6. class LinearEquationSolver:
+def init(self, matrix):
+self.matrix = matrix
+
+def solve(self):
+    rows, cols = len(self.matrix), len(self.matrix[0])
+
+    if rows != cols - 1:
+        raise ValueError("Размеры матрицы неверны для решения линейных уравнений")
+
+    for i in range(rows):
+        divisor = self.matrix[i][i]
+        for j in range(cols):
+            self.matrix[i][j] /= divisor
+
+        for k in range(rows):
+            if k != i:
+                factor = self.matrix[k][i]
+                for j in range(cols):
+                    self.matrix[k][j] -= factor * self.matrix[i][j]
+
+    solutions = [row[-1] for row in self.matrix]
+    return solutions
+
+matrix = [[2, 1, 5],
+[1, -1, 2]]
+
+
+solver = LinearEquationSolver(matrix)
+solutions = solver.solve()
+print(solutions)
+
+7. import pandas as pd
+
+df = pd.read_csv('data.csv')
+
+for column in df.columns:
+    print(f"Статистика по столбцу '{column}':")
+    print(f"Среднее значение: {df[column].mean()}")
+    print(f"Медиана: {df[column].median()}")
+    print(f"Минимальное значение: {df[column].min()}")
+    print(f"Максимальное значение: {df[column].max()}")
+    print(f"Сумма: {df[column].sum()}")
+    print(f"Количество уникальных значений: {df[column].nunique()}")
+    print("\n") 
+
+8. import random
+
+dictionary = ["яблоко", "банан", "вишня", "апельсин", "виноград", "киви", "груша", "дыня", "персик"]
+
+crossword = []
+for word in dictionary:
+    direction = random.choice(["горизонтально", "вертикально"])
+    if direction == "горизонтально":
+        x = random.randint(0, 10 - len(word))
+        y = random.randint(0, 10)
+        for i, letter in enumerate(word):
+            crossword.append((x + i, y, letter))
+    else:
+        x = random.randint(0, 10)
+        y = random.randint(0, 10 - len(word))
+        for i, letter in enumerate(word):
+            crossword.append((x, y + i, letter))
+
+for i in range(10):
+    for j in range(10):
+        found = False
+        for x, y, letter in crossword:
+            if x == i and y == j:
+                print(letter, end=' ')
+                found = True
+                break
+        if not found:
+            print('_', end=' ')
+    print()
+
+solution = input("Введите решение кроссворда: ")
+
+correct = True
+for x, y, letter in crossword:
+    if solution[x + y * 10] != letter:
+        correct = False
+        break
+
+if correct:
+    print("Поздравляем! Правильно решен кроссворд.")
+else:
+    print("Кроссворд решен неправильно.")
+
+9.

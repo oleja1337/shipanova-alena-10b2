@@ -1,0 +1,196 @@
+1. with open("example.txt", "w") as file:
+    file.write("Привет, мир!\n")
+    file.write("Это пример текста для файла.\n")
+    file.write("Надеюсь, это поможет вам понять, как работать с файлами.\n")
+
+def read_file(file_name):
+    with open(file_name, "r") as file:
+        for line in file:
+            print(line.strip())
+
+read_file("example.txt")
+
+2. data = [
+["Иван", "Иванов", 25],
+["Петр", "Петров", 30],
+["Мария", "Сидорова", 28]
+]
+
+with open("data.csv", mode="w", newline='') as file:
+writer = csv.writer(file)
+writer.writerow(["Имя", "Фамилия", "Возраст"])
+for row in data:
+writer.writerow(row)
+
+def read_csv(file_name):
+with open(file_name, mode="r") as file:
+reader = csv.reader(file)
+for row in reader:
+print(row)
+
+read_csv("data.csv")
+
+3. import csv
+
+def process_csv_file(file_name):
+    with open(file_name, 'r') as file:
+        reader = csv.reader(file)
+        header = next(reader)
+
+        total = 0
+        count = 0
+        min_value = float('inf')
+        max_value = float('-inf')
+
+        for row in reader:
+            value = float(row[1])
+            total += value
+            count += 1
+            if value < min_value:
+                min_value = value
+            if value > max_value:
+                max_value = value
+
+        average = total / count
+
+        print(f"Среднее значение: {average}")
+        print(f"Минимальное значение: {min_value}")
+        print(f"Максимальное значение: {max_value}")
+
+process_csv_file('weather_data.csv')
+
+4. import pandas as pd
+
+def merge_csv_files(*file_names):
+    dataframes = []
+    
+    for file_name in file_names:
+        if file_name.endswith('.csv'):
+            df = pd.read_csv(file_name)
+            dataframes.append(df)
+        
+    merged_df = pd.concat(dataframes)
+    merged_df.to_csv('merged_data.csv', index=False)
+    
+merge_csv_files('file1.csv', 'file2.csv', 'file3.csv')
+
+5.<products>
+    <product>
+        <name>Футболки</name>
+        <category>Одежда/category>
+        <price>20</price>
+    </product>
+    <product>
+        <name>Наушники</name>
+        <category>Электроника</category>
+        <price>50</price>
+    </product>
+    <product>
+        <name>Рюкзак</name>
+        <category>Аксессуары</category>
+        <price>30</price>
+    </product>
+</products>
+
+import xml.etree.ElementTree as ET
+
+tree = ET.parse('products.xml')
+root = tree.getroot()
+
+for product in root.findall('Продукт'):
+    name = product.find('Название').text
+    category = product.find('Категория').text
+    price = float(product.find('Цена').text)
+    
+    print(f"Продукт: {name}, Категория: {category}, Цена: {price}")
+
+sorted_products = sorted(root.findall('Продукт'), key=lambda x: float(x.find('Цена').text))
+print("\nОтсортированные по цене продукты:")
+for product in sorted_products:
+    name = product.find('Название').text
+    category = product.find('Категория').text
+    price = float(product.find('Цена').text)
+    
+    print(f"Продукт: {name}, Категория: {category}, Цена: {price}")
+
+category_filter = 'Одежда'
+filtered_products = [product for product in root.findall('Продукт') if product.find('Категория').text == category_filter]
+print(f"\nПродукты в категории '{category_filter}':")
+for product in filtered_products:
+    name = product.find('Название').text
+    category = product.find('Категория').text
+    price = float(product.find('Цена').text)
+    
+    print(f"Продукт: {name}, Категория: {category}, Цена: ${price}")
+
+total_price = sum([float(product.find('Цена').text) for product in root.findall('Продукт')])
+print(f"\nВсего: {total_price}")
+
+6. import os
+import pandas as pd
+
+if not os.path.exists("data"):
+    os.makedirs("data")
+
+statistics = {}
+
+for file in os.listdir("data"):
+    if file.endswith(".csv"):
+        df = pd.read_csv(os.path.join("data", file))
+        
+        age_stats = df['age'].describe()
+        statistics[file] = {"age": age_stats}
+        
+        gender_stats = df['gender'].value_counts()
+        statistics[file]["gender"] = gender_stats
+        
+        location_stats = df['location'].value_counts()
+        statistics[file]["location"] = location_stats
+
+for file, stats in statistics.items():
+    print(f"File: {file}")
+    print("Age statistics:")
+    print(stats["age"])
+    print("Gender statistics:")
+    print(stats["gender"])
+    print("Location statistics:")
+    print(stats["location"])
+    print()
+
+7. from collections import Counter
+import re
+
+with open('tweets.txt', 'r', encoding='utf-8') as file:
+    data = file.read()
+
+words = re.findall(r'\w+', data.lower())
+word_freq = Counter(words)
+
+sentences = re.split(r'[.!?]', data)
+sent_len = [len(sentence.split()) for sentence in sentences if sentence.strip()]
+
+keywords = ['python', 'data', 'analysis']
+keyword_count = sum(1 for word in words if word in keywords)
+
+print("Частота слов:")
+for word, freq in word_freq.most_common(10):
+    print(f'{word}: {freq}')
+
+avg_sent_len = sum(sent_len) / len(sent_len)
+print(f"Средняя длина предложения: {avg_sent_len}")
+
+print(f"Количество упоминаний ключевых слов: {keyword_count}")
+
+8. def bubble_sort(arr):
+    n = len(arr)
+    for i in range(n):
+        for j in range(0, n-i-1):
+            if arr[j] > arr[j+1]:
+                arr[j], arr[j+1] = arr[j+1], arr[j]
+    return arr
+
+numbers = [64, 34, 25, 12, 22, 11, 90]
+
+sorted_numbers = bubble_sort(numbers)
+
+print("Отсортированный список чисел:", sorted_numbers)
